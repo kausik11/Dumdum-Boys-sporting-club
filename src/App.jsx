@@ -88,10 +88,30 @@ function App() {
       ripplesInitializedRef.current = true
     }
 
+    const handleTouch = (event) => {
+      if (!ripplesInitializedRef.current) {
+        return
+      }
+      const touch = event.touches[0]
+      if (!touch) {
+        return
+      }
+      const rect = heroBanner.getBoundingClientRect()
+      const x = touch.clientX - rect.left
+      const y = touch.clientY - rect.top
+      try {
+        window.jQuery(heroBanner).ripples('drop', x, y, 20, 0.04)
+      } catch {
+        // Ignore ripples drop errors on unsupported devices.
+      }
+    }
+
     img.addEventListener('load', initRipples)
     if (img.complete) {
       initRipples()
     }
+
+    heroBanner.addEventListener('touchstart', handleTouch, { passive: true })
 
     return () => {
       try {
@@ -103,6 +123,7 @@ function App() {
         // Ignore cleanup errors if plugin fails to init.
       }
       img.removeEventListener('load', initRipples)
+      heroBanner.removeEventListener('touchstart', handleTouch)
     }
   }, [])
 
