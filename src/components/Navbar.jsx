@@ -1,17 +1,34 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import logo from '../assets/logo.jpeg'
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10)
+    }
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   return (
-    <header className="main-header">
+    <header className={`main-header ${isScrolled ? 'is-scrolled' : ''}`}>
       <div className="container navbar">
         <a className="brand" href="#home">
-          {/* <img
-            src="https://www.dadaboudihotel.in/static/media/dadaboudi-logo.333dd17ffe57d59eb586.png"
-            alt="Dada Boudi Hotel"
-          /> */}
-          <span>Boys Sporting Club</span>
+          <img src={logo} alt="Boys Sporting Club logo" />
+          <span className="brand-title">
+            দমদম বয়েজ
+            <br />
+            স্পোর্টিং ক্লাব
+          </span>
+
         </a>
         <nav className={`nav-links ${menuOpen ? 'open' : ''}`}>
           <a href="#home" onClick={() => setMenuOpen(false)}>
@@ -34,7 +51,7 @@ const Navbar = () => {
           </a>
         </nav>
         <div className="nav-actions">
-          {/* <button className="btn-primary">Order Now</button> */}
+          <button className="btn-primary">Contact us</button>
           <button
             className="nav-toggle"
             type="button"

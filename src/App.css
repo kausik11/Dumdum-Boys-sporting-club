@@ -24,7 +24,17 @@ body {
   z-index: 1000;
   background: #ffffff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  transition: background 0.25s ease, border-color 0.25s ease,
+    box-shadow 0.25s ease, backdrop-filter 0.25s ease;
 }
+
+/* .main-header.is-scrolled {
+  background: rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+} */
 
 .navbar {
   display: flex;
@@ -38,8 +48,19 @@ body {
   align-items: center;
   gap: 0.75rem;
   font-family: "Titillium Web", sans-serif;
-  font-weight: 700;
+  font-weight: 900;
   color: var(--dark);
+}
+
+.brand-title {
+  line-height: 1.1;
+  font-weight: 900;
+  background: linear-gradient(120deg, #b00020, #e65100, #0061ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  font-size: 20px;
 }
 
 .brand img {
@@ -120,6 +141,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  margin-bottom: 50px;
 }
 
 .hero-banner::before {
@@ -148,22 +170,29 @@ body {
   z-index: 2;
   margin: 0;
   padding: 0.9rem 1.6rem;
-  color: #f6d777;
+  color: #ffe6a3;
   font-family: "Playfair Display", serif;
-  font-size: clamp(2rem, 4vw, 2.8rem);
-  letter-spacing: 0.04em;
+  font-size: clamp(2rem, 4vw, 1.8rem);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  text-shadow: 0 10px 28px rgba(0, 0, 0, 0.6);
-  background: linear-gradient(
-    110deg,
-    rgba(8, 8, 8, 0.78),
-    rgba(8, 8, 8, 0.644)
-  );
+  text-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+  background: linear-gradient(120deg, rgba(8, 8, 8, 0.78), rgba(8, 8, 8, 0.4));
   border-radius: 999px;
-  border: 1px solid rgba(246, 215, 119, 0.35);
-  
-  text-align:center;
+  border: 1px solid rgba(255, 220, 150, 0.5);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(6px);
+  text-align: center;
   max-width: min(90vw, 820px);
+}
+
+@media (max-width: 640px) {
+  .hero-banner-title {
+    top: 60%;
+    padding: 0.7rem 1.2rem;
+    font-size: clamp(1.1rem, 5vw, 1.6rem);
+    letter-spacing: 0.04em;
+  }
 }
 
 .hero-banner-fallback {
@@ -456,6 +485,9 @@ body {
   .brand img {
     width: 52px;
     height: 52px;
+    background: transparent;
+    border-radius: 50%;
+    padding: 5px
   }
 
   .bottom-tab {

@@ -118,9 +118,10 @@ function App() {
           role="img"
           aria-label="Hero banner"
         >
-          <p className="hero-banner-title">DumDum Boy's Sporting club</p>
+          <p className="hero-banner-title">"||সরস্বতী মহাভাগে বিদ্যে কমললোচনে। বিশ্বরূপে বিশালাক্ষি বিদ্যাং দেহি নমোঽস্তু তে॥"</p>
         </section>
 
+{/* horizontal image slider */}
       
         <section className="hero hero-video">
           <video
