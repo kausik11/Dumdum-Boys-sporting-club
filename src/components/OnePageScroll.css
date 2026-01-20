@@ -10,6 +10,7 @@
   font-family: "Titillium Web", sans-serif;
   letter-spacing: 0.01em;
   overscroll-behavior: contain;
+  margin-bottom: 50px;
 }
 
 .ops-container {

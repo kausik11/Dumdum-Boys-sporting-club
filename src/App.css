@@ -131,6 +131,226 @@ body {
   padding: 3rem 0 4rem;
 }
 
+.gallery-grid {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.video-gallery {
+  margin-top: 2rem;
+  display: grid;
+  justify-items: center;
+}
+
+.video-slider {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+.video-slider-window {
+  overflow: hidden;
+}
+
+.video-slider-track {
+  display: flex;
+  transition: transform 0.5s ease;
+  will-change: transform;
+}
+
+.video-slide {
+  min-width: 100%;
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+}
+
+.video-frame {
+  width: min(100%, 900px);
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  background: #000;
+}
+
+.video-frame iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.video-caption {
+  font-weight: 600;
+  color: #fffffffb;
+}
+
+.video-nav {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  color: #3a141a;
+  font-size: 2rem;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-nav:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.2);
+}
+
+.video-dots {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  
+}
+
+.video-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(245, 244, 244, 0.897);
+  cursor: pointer;
+}
+
+.video-dot.is-active {
+  background: rgba(233, 229, 8, 0.9);
+}
+
+@media (max-width: 768px) {
+  .video-slider {
+    grid-template-columns: 1fr;
+  }
+
+  .video-nav {
+    justify-self: center;
+  }
+}
+
+.gallery-card {
+  border: none;
+  padding: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.gallery-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.18);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.gallery-card span {
+  font-weight: 600;
+  color: #f7f6f6;
+}
+
+.gallery-card:hover img {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 24px 40px rgba(0, 0, 0, 0.22);
+}
+
+.gallery-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 6, 10, 0.75);
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1200;
+}
+
+.gallery-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.gallery-frame {
+  width: min(860px, 90vw);
+  background: #fff;
+  border-radius: 20px;
+  padding: 2rem;
+  display: grid;
+  gap: 1rem;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-frame img {
+  width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  border-radius: 16px;
+}
+
+.gallery-frame p {
+  margin: 0;
+  color: #4a1a1a;
+  font-weight: 600;
+}
+
+.gallery-close {
+  justify-self: end;
+  border: none;
+  background: rgba(0, 0, 0, 0.08);
+  color: #111;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.gallery-close:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.carousel-marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 1.2rem 0;
+  background: linear-gradient(90deg, #f9f5ef 0%, #fff 50%, #f9f5ef 100%);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.carousel-marquee-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 2.5rem;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.carousel-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 700;
+  font-size: clamp(1rem, 2.4vw, 1.5rem);
+  color: #3a141a;
+  letter-spacing: 0.02em;
+}
+
 .hero-banner {
   width: 100vw;
   height: 100vh;
@@ -229,11 +449,11 @@ body {
 .hero-video-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
+  /* background: linear-gradient(
     120deg,
     rgba(0, 0, 0, 0.72),
     rgba(12, 20, 26, 0.6)
-  );
+  ); */
   z-index: 1;
 }
 
@@ -305,12 +525,14 @@ body {
   font-family: "Titillium Web", sans-serif;
   font-size: 2rem;
   margin-bottom: 1rem;
+  color: #f9f5ef;
 }
 
 .section-subtitle {
   color: var(--muted);
   margin-bottom: 2rem;
   max-width: 620px;
+   color: #f9f5ef;
 }
 
 .best-sellers {

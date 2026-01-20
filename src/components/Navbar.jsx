@@ -43,8 +43,8 @@ const Navbar = () => {
           <a href="#awards" onClick={() => setMenuOpen(false)}>
             Awards
           </a>
-          <a href="#locations" onClick={() => setMenuOpen(false)}>
-            Location
+          <a href="#gallery" onClick={() => setMenuOpen(false)}>
+           Gallery
           </a>
           <a href="#contact" onClick={() => setMenuOpen(false)}>
             Contact

@@ -3,6 +3,11 @@ import './App.css'
 import Navbar from './components/Navbar'
 import OnePageScroll from './components/OnePageScroll'
 import heroImage2 from './assets/heroImage2.jpeg'
+import heroVideo from './assets/heroVideo.mp4'
+import fullpage1 from './assets/fullpage1.jpeg'
+import fullpage2 from './assets/fullpage2.jpeg'
+import fullpage3 from './assets/fullpage3.jpeg'
+import heroImage1 from './assets/heroImage1.jpeg'
 
 const bestSellers = [
   {
@@ -62,9 +67,66 @@ const locations = [
   },
 ]
 
+const galleryImages = [
+  {
+    src: fullpage1,
+    caption: 'শুভ্রতার আলোয় জ্ঞানের উৎসব',
+  },
+  {
+    src: fullpage2,
+    caption: 'মহাশ্বেতার শুদ্ধ রূপ',
+  },
+  {
+    src: fullpage3,
+    caption: 'আনন্দের রঙে সাজানো সন্ধ্যা',
+  },
+  {
+    src: heroImage1,
+    caption: 'ঐতিহ্যের ছোঁয়ায় নতুন সকাল',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1200&q=80',
+    caption: 'নব প্রভাতে শুভ সূচনা',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80',
+    caption: 'আলো-ছায়ায় উৎসবের ছোঁয়া',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80',
+    caption: 'সুরের মূর্ছনায় সারস সাদা',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80',
+    caption: 'সন্ধ্যার আকাশে শান্তি',
+  },
+]
+
+const videoSlides = [
+  {
+    title: '2026',
+    src: 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1915028685766318%2F&show_text=false&width=380&t=0',
+  },
+  {
+    title: '2025',
+    src: 'https://www.facebook.com/plugins/video.php?height=448&href=https%3A%2F%2Fwww.facebook.com%2Fboyssportingclub%2Fvideos%2F998575524414707%2F&show_text=false&width=560&t=0',
+  },
+  {
+    title: '2024',
+    src: 'https://www.facebook.com/plugins/video.php?height=308&href=https%3A%2F%2Fwww.facebook.com%2Fboyssportingclub%2Fvideos%2F3530572460401863%2F&show_text=false&width=560&t=0',
+  },
+  {
+    title: 'Facebook Reel 2',
+    src: 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1768675153966820%2F&show_text=false&width=267&t=0',
+  },
+]
+
 function App() {
   const heroBannerRef = useRef(null)
   const ripplesInitializedRef = useRef(false)
+  const marqueeRef = useRef(null)
+  const galleryRef = useRef(null)
+  const videoSliderRef = useRef(null)
 
   useEffect(() => {
     const heroBanner = heroBannerRef.current
@@ -127,6 +189,157 @@ function App() {
     }
   }, [])
 
+  useEffect(() => {
+    const root = marqueeRef.current
+    const $ = window.jQuery
+    if (!root || !$) {
+      return
+    }
+
+    const $track = $(root).find('.carousel-marquee-track')
+    const speed = 60
+    let rafId = null
+    let lastTime = null
+    let offsetX = 0
+
+    const buildTrack = () => {
+      const original = $track.data('original') || $track.html()
+      $track.data('original', original)
+      $track.html(original)
+      const containerWidth = root.clientWidth || 1
+
+      while ($track[0].scrollWidth < containerWidth * 2) {
+        $track.append(original)
+      }
+
+      offsetX = 0
+      $track.css('transform', 'translate3d(0, 0, 0)')
+    }
+
+    const tick = (time) => {
+      if (!lastTime) {
+        lastTime = time
+      }
+      const delta = (time - lastTime) / 1000
+      lastTime = time
+      offsetX -= speed * delta
+      const loopWidth = $track[0].scrollWidth / 2
+      if (Math.abs(offsetX) >= loopWidth) {
+        offsetX = 0
+      }
+      $track.css('transform', `translate3d(${offsetX}px, 0, 0)`)
+      rafId = window.requestAnimationFrame(tick)
+    }
+
+    buildTrack()
+    rafId = window.requestAnimationFrame(tick)
+    $(window).on('resize.carouselMarquee', buildTrack)
+
+    return () => {
+      if (rafId) {
+        window.cancelAnimationFrame(rafId)
+      }
+      $(window).off('resize.carouselMarquee')
+    }
+  }, [])
+
+  useEffect(() => {
+    const root = galleryRef.current
+    const $ = window.jQuery
+    if (!root || !$) {
+      return
+    }
+
+    const $root = $(root)
+    const $overlay = $root.find('.gallery-overlay')
+    const $overlayImg = $root.find('.gallery-overlay img')
+    const $overlayCaption = $root.find('.gallery-overlay p')
+
+    const openOverlay = (src, caption) => {
+      $overlayImg.attr('src', src)
+      $overlayCaption.text(caption || '')
+      $overlay.addClass('is-open')
+    }
+
+    const closeOverlay = () => {
+      $overlay.removeClass('is-open')
+    }
+
+    $root.on('click.gallery', '.gallery-card', (event) => {
+      const $card = $(event.currentTarget)
+      openOverlay($card.data('src'), $card.data('caption'))
+    })
+
+    $root.on('click.gallery', '.gallery-overlay, .gallery-close', (event) => {
+      if ($(event.target).closest('.gallery-frame').length) {
+        return
+      }
+      closeOverlay()
+    })
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        closeOverlay()
+      }
+    }
+
+    $(window).on('keydown.gallery', handleKeyDown)
+
+    return () => {
+      $root.off('.gallery')
+      $(window).off('keydown.gallery', handleKeyDown)
+    }
+  }, [])
+
+  useEffect(() => {
+    const root = videoSliderRef.current
+    const $ = window.jQuery
+    if (!root || !$) {
+      return
+    }
+
+    const $root = $(root)
+    const $track = $root.find('.video-slider-track')
+    const $slides = $track.find('.video-slide')
+    const $dots = $root.find('.video-dot')
+    const total = $slides.length
+    let index = 0
+    let isLocked = false
+
+    const setActive = (nextIndex) => {
+      index = nextIndex
+      $track.css('transform', `translate3d(-${index * 100}%, 0, 0)`)
+      $dots.removeClass('is-active').eq(index).addClass('is-active')
+    }
+
+    const goTo = (nextIndex) => {
+      if (isLocked) {
+        return
+      }
+      const bounded = (nextIndex + total) % total
+      isLocked = true
+      setActive(bounded)
+      window.setTimeout(() => {
+        isLocked = false
+      }, 500)
+    }
+
+    $root.on('click.video', '.video-next', () => goTo(index + 1))
+    $root.on('click.video', '.video-prev', () => goTo(index - 1))
+    $root.on('click.video', '.video-dot', (event) => {
+      const target = Number($(event.currentTarget).attr('data-index'))
+      if (!Number.isNaN(target)) {
+        goTo(target)
+      }
+    })
+
+    setActive(0)
+
+    return () => {
+      $root.off('.video')
+    }
+  }, [])
+
   return (
     <div>
       <Navbar />
@@ -155,10 +368,10 @@ function App() {
             muted
             loop
             playsInline
-            poster="https://www.dadaboudihotel.in/static/media/hero-slider-1.aa859997652e3d535699.jpg"
+            // poster="https://www.dadaboudihotel.in/static/media/hero-slider-1.aa859997652e3d535699.jpg"
           >
             <source
-              src="https://www.w3schools.com/howto/rain.mp4"
+              src={heroVideo}
               type="video/mp4"
             />
           </video>
@@ -181,6 +394,15 @@ function App() {
           </div>
         </section>
 
+       {/* carusal marque */}
+       <section className="carousel-marquee" ref={marqueeRef} aria-label="Scrolling marquee">
+          <div className="carousel-marquee-track">
+            <span className="carousel-marquee-item">
+              এবারের নিবেদন-জ্ঞান, পবিত্রতা ও শুভ্রতার প্রতীক মা সরস্বতীর রূপ—মহাশ্বেতা।
+            </span>
+          </div>
+        </section>
+       
         <section id="menu" className="section light">
           <div className="container">
             <h2 className="section-title">Best Sellers</h2>
@@ -232,27 +454,84 @@ function App() {
           </div>
         </section>
 
-        <section id="locations" className="section light">
-          <div className="container">
-            <h2 className="section-title">All Locations</h2>
+        <section id="video-gallery" className="section light">
+          <div className="container" ref={videoSliderRef}>
+            <h2 className="section-title">Video Gallery</h2>
             <p className="section-subtitle">
-              Visit us across Barrackpore and Sodepur for the same authentic
-              experience.
+              ফেসবুক ভিডিওতে উৎসবের স্মৃতি
             </p>
-            <div className="locations">
-              {locations.map((location) => (
-                <div className="location-card" key={location.name}>
-                  <img src={location.image} alt={location.name} loading="lazy" />
-                  <div className="content">
-                    <h3>{location.name}</h3>
-                    <p>{location.address}</p>
-                    <p>
-                      <strong>Contact:</strong>{' '}
-                      <a href={`tel:${location.phone}`}>{location.phone}</a>
-                    </p>
-                  </div>
+            <div className="video-slider">
+              <button className="video-nav video-prev" type="button" aria-label="Previous video">
+                ‹
+              </button>
+              <div className="video-slider-window">
+                <div className="video-slider-track">
+                  {videoSlides.map((video) => (
+                    <div className="video-slide" key={video.src}>
+                      <div className="video-frame">
+                        <iframe
+                          title={video.title}
+                          src={video.src}
+                          width="560"
+                          height="448"
+                          style={{ border: 'none', overflow: 'hidden' }}
+                          scrolling="no"
+                          frameBorder="0"
+                          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                          allowFullScreen
+                        ></iframe>
+                      </div>
+                      <span className="video-caption">{video.title}</span>
+                    </div>
+                  ))}
                 </div>
+              </div>
+              <button className="video-nav video-next" type="button" aria-label="Next video">
+                ›
+              </button>
+            </div>
+            <div className="video-dots" role="tablist" aria-label="Video slides">
+              {videoSlides.map((video, idx) => (
+                <button
+                  key={video.src}
+                  type="button"
+                  className={`video-dot${idx === 0 ? ' is-active' : ''}`}
+                  data-index={idx}
+                  aria-label={`Go to video ${idx + 1}`}
+                ></button>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="gallery" className="section light">
+          <div className="container" ref={galleryRef}>
+            <h2 className="section-title">Image Gallery</h2>
+            <p className="section-subtitle">
+            শুভ্রতার আলোয় জ্ঞানের উৎসবের এক ঝলক
+            </p>
+            <div className="gallery-grid">
+              {galleryImages.map((image) => (
+                <button
+                  key={image.src}
+                  type="button"
+                  className="gallery-card"
+                  data-src={image.src}
+                  data-caption={image.caption}
+                >
+                  <img src={image.src} alt={image.caption} loading="lazy" />
+                  <span>{image.caption}</span>
+                </button>
+              ))}
+            </div>
+            <div className="gallery-overlay" aria-hidden="true">
+              <div className="gallery-frame">
+                <button className="gallery-close" type="button" aria-label="Close gallery">
+                  ×
+                </button>
+                <img src={galleryImages[0].src} alt="Gallery preview" />
+                <p>{galleryImages[0].caption}</p>
+              </div>
             </div>
           </div>
         </section>
