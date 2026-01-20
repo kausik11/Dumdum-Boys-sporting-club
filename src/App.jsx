@@ -111,16 +111,18 @@ function App() {
 
       <main>
         {/* hero banner image section */}
-        <section
+        <section id="home" 
           className="hero-banner"
           ref={heroBannerRef}
           style={{ backgroundImage: `url(${heroImage2})` }}
           role="img"
           aria-label="Hero banner"
-        />
+        >
+          <p className="hero-banner-title">DumDum Boy's Sporting club</p>
+        </section>
 
       
-        <section id="home" className="hero hero-video">
+        <section className="hero hero-video">
           <video
             className="hero-video-media"
             autoPlay
