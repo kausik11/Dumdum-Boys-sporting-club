@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import './App.css'
 import Navbar from './components/Navbar'
+import OnePageScroll from './components/OnePageScroll'
 import heroImage2 from './assets/heroImage2.jpeg'
 
 const bestSellers = [
@@ -111,7 +112,7 @@ function App() {
 
       <main>
         {/* hero banner image section */}
-        <section id="home" 
+        <section id="home"
           className="hero-banner"
           ref={heroBannerRef}
           style={{ backgroundImage: `url(${heroImage2})` }}
@@ -121,8 +122,11 @@ function App() {
           <p className="hero-banner-title">"||সরস্বতী মহাভাগে বিদ্যে কমললোচনে। বিশ্বরূপে বিশালাক্ষি বিদ্যাং দেহি নমোঽস্তু তে॥"</p>
         </section>
 
-{/* horizontal image slider */}
-      
+        {/* horizontal image slider */}
+        
+     <OnePageScroll />
+        
+        
         <section className="hero hero-video">
           <video
             className="hero-video-media"
