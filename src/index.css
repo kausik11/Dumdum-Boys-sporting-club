@@ -30,3 +30,12 @@ img {
 button {
   font-family: inherit;
 }
+
+html.has-scroll-smooth,
+html.has-scroll-smooth body {
+  overflow: hidden;
+}
+
+[data-scroll-container] {
+  min-height: 100vh;
+}

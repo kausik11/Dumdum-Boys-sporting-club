@@ -22,7 +22,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: #ffffff;
+  background: #cfcdcd;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   transition: background 0.25s ease, border-color 0.25s ease,
     box-shadow 0.25s ease, backdrop-filter 0.25s ease;
@@ -124,6 +124,67 @@ body {
   display: flex;
   align-items: center;
   gap: 0.8rem;
+}
+
+.contact-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: grid;
+  place-items: center;
+  z-index: 2000;
+  padding: 1.5rem;
+}
+
+.contact-modal {
+  width: min(720px, 100%);
+  background: #fff;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+  display: grid;
+  gap: 1.5rem;
+}
+
+.contact-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contact-modal-header h3 {
+  margin: 0;
+}
+
+.contact-modal-close {
+  border: none;
+  background: rgba(0, 0, 0, 0.08);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.contact-modal-body {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.contact-modal-body h4 {
+  margin: 0 0 0.25rem;
+  color: var(--primary);
+}
+
+.contact-modal-body p {
+  margin: 0.15rem 0;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .contact-modal {
+    padding: 1.5rem;
+  }
 }
 
 .hero {
@@ -539,6 +600,73 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1.25rem;
+}
+
+.best-sellers-slider {
+  position: relative;
+  overflow: hidden;
+  margin-top: 2rem;
+  border-radius: 20px;
+}
+
+.best-sellers-track {
+  display: flex;
+  gap: 1rem ;
+  transition: transform 0.6s ease;
+  will-change: transform;
+}
+
+.best-sellers-track .best-card {
+  flex: 0 0 calc(100% / 3);
+  margin: 0;
+}
+
+.pujo-theme {
+  background: none;
+  margin-bottom: 50px;
+}
+
+.pujo-theme-card {
+  position: relative;
+  margin-top: 2.5rem;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(138, 2, 33, 0.2);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+}
+
+.pujo-theme-card img {
+  width: 100%;
+  height: clamp(460px, 55vw, 620px);
+  object-fit: cover;
+  display: block;
+}
+
+.pujo-theme-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 1.25rem 2rem;
+  background: linear-gradient(180deg, rgba(12, 8, 8, 0) 0%, rgba(12, 8, 8, 0.75) 100%);
+  color: #fef7ea;
+}
+
+.pujo-theme-overlay span {
+  font-family: "Titillium Web", sans-serif;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1024px) {
+  .best-sellers-track .best-card {
+    flex-basis: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .best-sellers-track .best-card {
+    flex-basis: 100%;
+  }
 }
 
 .best-card {

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import LocomotiveScroll from 'locomotive-scroll'
 import './App.css'
 import Navbar from './components/Navbar'
 import OnePageScroll from './components/OnePageScroll'
@@ -8,6 +9,7 @@ import fullpage1 from './assets/fullpage1.jpeg'
 import fullpage2 from './assets/fullpage2.jpeg'
 import fullpage3 from './assets/fullpage3.jpeg'
 import heroImage1 from './assets/heroImage1.jpeg'
+import ongoing1 from './assets/ongoing1.jpg'
 
 const bestSellers = [
   {
@@ -127,6 +129,8 @@ function App() {
   const marqueeRef = useRef(null)
   const galleryRef = useRef(null)
   const videoSliderRef = useRef(null)
+  const scrollContainerRef = useRef(null)
+  const bestSliderRef = useRef(null)
 
   useEffect(() => {
     const heroBanner = heroBannerRef.current
@@ -340,11 +344,117 @@ function App() {
     }
   }, [])
 
+  useEffect(() => {
+    const container = scrollContainerRef.current
+    if (!container) {
+      return
+    }
+
+    const scroll = new LocomotiveScroll({
+      el: container,
+      smooth: true,
+      lerp: 0.08,
+      smartphone: { smooth: true },
+      tablet: { smooth: true },
+    })
+
+    const handleAnchorClick = (event) => {
+      const link = event.target.closest('a[href^="#"]')
+      if (!link) {
+        return
+      }
+      const href = link.getAttribute('href')
+      if (!href || href === '#') {
+        return
+      }
+      const target = container.querySelector(href)
+      if (!target) {
+        return
+      }
+      event.preventDefault()
+      scroll.scrollTo(target)
+    }
+
+    document.addEventListener('click', handleAnchorClick)
+
+    return () => {
+      document.removeEventListener('click', handleAnchorClick)
+      scroll.destroy()
+    }
+  }, [])
+
+  useEffect(() => {
+    const root = bestSliderRef.current
+    const $ = window.jQuery
+    if (!root || !$) {
+      return
+    }
+
+    const $root = $(root)
+    const $track = $root.find('.best-sellers-track')
+    const $slides = $track.find('.best-card')
+    if (!$slides.length) {
+      return
+    }
+
+    let index = 0
+    let intervalId = null
+    const total = $slides.length
+    let visibleCount = 3
+
+    const getVisibleCount = () => {
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        return 1
+      }
+      if (window.matchMedia('(max-width: 1024px)').matches) {
+        return 2
+      }
+      return 3
+    }
+
+    const updateVisibleCount = () => {
+      visibleCount = getVisibleCount()
+      $track.css('transform', `translate3d(-${index * (100 / visibleCount)}%, 0, 0)`)
+    }
+
+    const advance = () => {
+      const maxIndex = Math.max(total - visibleCount, 0)
+      index = index >= maxIndex ? 0 : index + 1
+      $track.css('transform', `translate3d(-${index * (100 / visibleCount)}%, 0, 0)`)
+    }
+
+    updateVisibleCount()
+    intervalId = window.setInterval(advance, 2800)
+
+    $root.on('mouseenter.bestSlider', () => {
+      if (intervalId) {
+        window.clearInterval(intervalId)
+        intervalId = null
+      }
+    })
+
+    $root.on('mouseleave.bestSlider', () => {
+      if (!intervalId) {
+        intervalId = window.setInterval(advance, 2800)
+      }
+    })
+
+    $(window).on('resize.bestSlider', updateVisibleCount)
+
+    return () => {
+      if (intervalId) {
+        window.clearInterval(intervalId)
+      }
+      $root.off('.bestSlider')
+      $(window).off('resize.bestSlider')
+    }
+  }, [])
+
   return (
     <div>
       <Navbar />
-
-      <main>
+      <div data-scroll-container ref={scrollContainerRef}>
+      <main data-scroll-section>
         {/* hero banner image section */}
         <section id="home"
           className="hero-banner"
@@ -355,6 +465,24 @@ function App() {
         >
           <p className="hero-banner-title">"||সরস্বতী মহাভাগে বিদ্যে কমললোচনে। বিশ্বরূপে বিশালাক্ষি বিদ্যাং দেহি নমোঽস্তু তে॥"</p>
         </section>
+
+           <section className="section pujo-theme">
+          <div className="container">
+            <h2 className="section-title">This Year Pujo Theme</h2>
+            <p className="section-subtitle">
+              নতুন ভাবনার ছোঁয়ায় উৎসবের সাজ
+            </p>
+            <div className="pujo-theme-card">
+              <img src={ongoing1} alt="This year pujo theme" loading="lazy" />
+              <div className="pujo-theme-overlay">
+                <span>Ongoing Theme Showcase</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
 
         {/* horizontal image slider */}
         
@@ -394,6 +522,9 @@ function App() {
           </div>
         </section>
 
+         
+
+
        {/* carusal marque */}
        <section className="carousel-marquee" ref={marqueeRef} aria-label="Scrolling marquee">
           <div className="carousel-marquee-track">
@@ -405,21 +536,24 @@ function App() {
        
         <section id="menu" className="section light">
           <div className="container">
-            <h2 className="section-title">Best Sellers</h2>
+            <h2 className="section-title">Best Moments</h2>
             <p className="section-subtitle">
-              Signature dishes that define the Dada Boudi story and keep the
-              city coming back.
+              The Boys sporting club of Dumdum
             </p>
-            <div className="best-sellers">
-              {bestSellers.map((item) => (
-                <div className="best-card" key={item.name}>
-                  <img src={item.image} alt={item.name} loading="lazy" />
-                  <h4>{item.name}</h4>
-                </div>
-              ))}
+            <div className="best-sellers-slider" ref={bestSliderRef}>
+              <div className="best-sellers-track">
+                {bestSellers.map((item) => (
+                  <div className="best-card" key={item.name}>
+                    <img src={item.image} alt={item.name} loading="lazy" />
+                    <h4>{item.name}</h4>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
+
+       
 
         <section id="story" className="story">
           <div className="container">
@@ -537,7 +671,7 @@ function App() {
         </section>
       </main>
 
-      <footer id="contact" className="footer">
+      <footer id="contact" className="footer" data-scroll-section>
         <div className="container footer-grid">
           <div>
             <h4>Dada Boudi Hotel</h4>
@@ -576,11 +710,12 @@ function App() {
         </div>
       </footer>
 
-      <div className="bottom-tab">
+      <div className="bottom-tab" data-scroll-section>
         <a href="#home">Home</a>
         <a href="#menu">Menu</a>
         <a href="#story">Story</a>
         <a href="#locations">Location</a>
+      </div>
       </div>
     </div>
   )
