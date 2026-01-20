@@ -110,6 +110,37 @@ body {
   padding: 3rem 0 4rem;
 }
 
+.hero-banner {
+  width: 100vw;
+  height: 100vh;
+  margin-left: calc(50% - 50vw);
+  overflow: hidden;
+  position: relative;
+  background-color: #000000;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.hero-banner > canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.hero-banner-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero-banner.ripples-ready .hero-banner-fallback {
+  opacity: 0;
+}
+
 .hero-video {
   position: relative;
   min-height: 100vh;

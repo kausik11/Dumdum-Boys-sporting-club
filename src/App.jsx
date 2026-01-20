@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useRef } from 'react'
 import './App.css'
+import Navbar from './components/Navbar'
+import heroImage2 from './assets/heroImage2.jpeg'
 
 const bestSellers = [
   {
@@ -60,54 +62,64 @@ const locations = [
 ]
 
 function App() {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const heroBannerRef = useRef(null)
+  const ripplesInitializedRef = useRef(false)
+
+  useEffect(() => {
+    const heroBanner = heroBannerRef.current
+    if (!heroBanner || !window.jQuery || !window.jQuery.fn.ripples) {
+      return
+    }
+
+    const img = new Image()
+    img.src = heroImage2
+
+    const initRipples = () => {
+      if (ripplesInitializedRef.current) {
+        return
+      }
+      const $heroBanner = window.jQuery(heroBanner)
+      $heroBanner.ripples({
+        resolution: 768,
+        dropRadius: 18,
+        perturbance: 0.02,
+      })
+      ripplesInitializedRef.current = true
+    }
+
+    img.addEventListener('load', initRipples)
+    if (img.complete) {
+      initRipples()
+    }
+
+    return () => {
+      try {
+        if (ripplesInitializedRef.current) {
+          window.jQuery(heroBanner).ripples('destroy')
+          ripplesInitializedRef.current = false
+        }
+      } catch {
+        // Ignore cleanup errors if plugin fails to init.
+      }
+      img.removeEventListener('load', initRipples)
+    }
+  }, [])
 
   return (
     <div>
-      <header className="main-header">
-        <div className="container navbar">
-          <a className="brand" href="#home">
-            {/* <img
-              src="https://www.dadaboudihotel.in/static/media/dadaboudi-logo.333dd17ffe57d59eb586.png"
-              alt="Dada Boudi Hotel"
-            /> */}
-            <span>Boys Sporting Club</span>
-          </a>
-          <nav className={`nav-links ${menuOpen ? 'open' : ''}`}>
-            <a href="#home" onClick={() => setMenuOpen(false)}>
-              Home
-            </a>
-            <a href="#menu" onClick={() => setMenuOpen(false)}>
-              Menu
-            </a>
-            <a href="#story" onClick={() => setMenuOpen(false)}>
-              Our Story
-            </a>
-            <a href="#awards" onClick={() => setMenuOpen(false)}>
-              Awards
-            </a>
-            <a href="#locations" onClick={() => setMenuOpen(false)}>
-              Location
-            </a>
-            <a href="#contact" onClick={() => setMenuOpen(false)}>
-              Contact
-            </a>
-          </nav>
-          <div className="nav-actions">
-            <button className="btn-primary">Order Now</button>
-            <button
-              className="nav-toggle"
-              type="button"
-              onClick={() => setMenuOpen((prev) => !prev)}
-              aria-label="Toggle navigation"
-            >
-              ☰
-            </button>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       <main>
+        {/* hero banner image section */}
+        <section
+          className="hero-banner"
+          ref={heroBannerRef}
+          style={{ backgroundImage: `url(${heroImage2})` }}
+          role="img"
+          aria-label="Hero banner"
+        />
+
+      
         <section id="home" className="hero hero-video">
           <video
             className="hero-video-media"
