@@ -1292,11 +1292,7 @@ function App() {
             </div>
           </div>
           <p className="footer-credit">
-            © 2026 Dumdum Boys Sporting Club. All rights reserved. Contact:{" "}
-            <a href="mailto:dumdumboyssportingclub@gmail.com">
-              dumdumboyssportingclub@gmail.com
-            </a>
-            . Proudly maintained by ❤️{" "}
+            © 2026 Dumdum Boys Sporting Club. All rights reserved. Proudly maintained by ❤️{" "}
             <a
               href="https://www.linkedin.com/in/kausik-saha-fsd"
               target="_blank"
