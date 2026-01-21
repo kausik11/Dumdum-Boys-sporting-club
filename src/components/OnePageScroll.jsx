@@ -123,7 +123,50 @@ function OnePageScroll() {
       const atFirst = currentIndex <= 0
       const atLast = currentIndex >= $sections.length - 1
 
-      if ((delta > 0 && !atLast) || (delta < 0 && !atFirst)) {
+      event.preventDefault()
+    }
+
+    let touchStartY = 0
+    const touchThreshold = 40
+
+    const handleTouchStart = (event) => {
+      if (!isRootActive()) {
+        return
+      }
+      const touch = event.touches?.[0]
+      if (!touch) {
+        return
+      }
+      touchStartY = touch.clientY
+    }
+
+    const handleTouchMove = (event) => {
+      if (!isRootActive()) {
+        return
+      }
+      const touch = event.touches?.[0]
+      if (!touch) {
+        return
+      }
+
+      const delta = touch.clientY - touchStartY
+      const atFirst = currentIndex <= 0
+      const atLast = currentIndex >= $sections.length - 1
+
+      if (Math.abs(delta) < touchThreshold) {
+        event.preventDefault()
+        return
+      }
+
+      if (delta < 0 && !atLast) {
+        event.preventDefault()
+        goTo(currentIndex + 1)
+        touchStartY = touch.clientY
+      } else if (delta > 0 && !atFirst) {
+        event.preventDefault()
+        goTo(currentIndex - 1)
+        touchStartY = touch.clientY
+      } else {
         event.preventDefault()
       }
     }
@@ -170,6 +213,8 @@ function OnePageScroll() {
     $root.on('click.ops', '.ops-cta', handleJump)
     $(window).on('keydown.ops', handleKeyDown)
     window.addEventListener('wheel', handleWindowWheel, { passive: false })
+    root.addEventListener('touchstart', handleTouchStart, { passive: true })
+    root.addEventListener('touchmove', handleTouchMove, { passive: false })
 
     setActive(0)
 
@@ -177,6 +222,8 @@ function OnePageScroll() {
       $root.off('.ops')
       $(window).off('.ops')
       window.removeEventListener('wheel', handleWindowWheel)
+      root.removeEventListener('touchstart', handleTouchStart)
+      root.removeEventListener('touchmove', handleTouchMove)
     }
   }, [])
 

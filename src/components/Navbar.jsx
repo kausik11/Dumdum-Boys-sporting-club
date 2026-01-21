@@ -58,19 +58,16 @@ const Navbar = () => {
               Home
             </a>
             <a href="#menu" onClick={() => setMenuOpen(false)}>
-              Menu
+              Moments
             </a>
             <a href="#story" onClick={() => setMenuOpen(false)}>
-              Our Story
+              story
             </a>
             <a href="#awards" onClick={() => setMenuOpen(false)}>
-              Awards
+              Milestones
             </a>
             <a href="#gallery" onClick={() => setMenuOpen(false)}>
-             Gallery
-            </a>
-            <a href="#contact" onClick={() => setMenuOpen(false)}>
-              Contact
+              Gallery
             </a>
           </nav>
           <div className="nav-actions">
@@ -111,20 +108,22 @@ const Navbar = () => {
             </div>
             <div className="contact-modal-body">
               <div>
-                <h4>Dada Boudi Hotel</h4>
-                <p>1, Ghoshpara Rd, Barrackpore, West Bengal 700120</p>
+                <h4>Mithu Da</h4>
+                {/* <p>1, Ghoshpara Rd, Barrackpore, West Bengal 700120</p> */}
                 <p>Phone: 8100510647</p>
                 <p>Email: dadaboudiofficial@gmail.com</p>
               </div>
               <div>
-                <h4>Dada Boudi Restaurant</h4>
-                <p>12, 10, SN Banerjee Rd, Barrackpore, West Bengal 700120</p>
+                <h4>Swami Da</h4>
+                {/* <p>12, 10, SN Banerjee Rd, Barrackpore, West Bengal 700120</p> */}
                 <p>Phone: 8017099986</p>
+                <p>Email: dadaboudiofficial@gmail.com</p>
               </div>
               <div>
-                <h4>Dada Boudi Sodepur</h4>
-                <p>33, Barrackpore Trunk Rd, Sodepur, West Bengal 700117</p>
+                <h4>Jayanta Da</h4>
+                {/* <p>33, Barrackpore Trunk Rd, Sodepur, West Bengal 700117</p> */}
                 <p>Phone: 9748528886</p>
+                <p>Email: dadaboudiofficial@gmail.com</p>
               </div>
             </div>
           </div>
