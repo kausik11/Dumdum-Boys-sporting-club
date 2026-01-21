@@ -126,6 +126,11 @@ const videoSlides = [
 function App() {
   const heroBannerRef = useRef(null)
   const ripplesInitializedRef = useRef(false)
+
+  // automatic ripple
+  const rippleIntervalRef = useRef(null)
+
+  
   const marqueeRef = useRef(null)
   const galleryRef = useRef(null)
   const videoSliderRef = useRef(null)
@@ -152,8 +157,22 @@ function App() {
         perturbance: 0.02,
       })
       ripplesInitializedRef.current = true
+
+         // 🌊 DEFAULT RIPPLE (ALWAYS RUNNING)
+    rippleIntervalRef.current = setInterval(() => {
+      try {
+        const rect = heroBanner.getBoundingClientRect()
+        const x = Math.random() * rect.width
+        const y = rect.height * 0.6 + Math.random() * rect.height * 0.4
+        $heroBanner.ripples('drop', x, y, 14, 0.03)
+      } catch {
+        // safe ignore
+      }
+    }, 2500) // calm divine rhythm
+    
     }
 
+    
     const handleTouch = (event) => {
       if (!ripplesInitializedRef.current) {
         return
@@ -172,6 +191,28 @@ function App() {
       }
     }
 
+    // handle pointer
+    const handlePointer = (event) => {
+  if (!ripplesInitializedRef.current) return
+
+  const rect = heroBanner.getBoundingClientRect()
+  const x = event.clientX
+    ? event.clientX - rect.left
+    : event.touches?.[0]?.clientX - rect.left
+
+  const y = event.clientY
+    ? event.clientY - rect.top
+    : event.touches?.[0]?.clientY - rect.top
+
+  if (!x || !y) return
+
+  try {
+    window.jQuery(heroBanner).ripples('drop', x, y, 20, 0.04)
+  } catch {}
+}
+
+
+
     img.addEventListener('load', initRipples)
     if (img.complete) {
       initRipples()
@@ -189,7 +230,10 @@ function App() {
         // Ignore cleanup errors if plugin fails to init.
       }
       img.removeEventListener('load', initRipples)
-      heroBanner.removeEventListener('touchstart', handleTouch)
+      // heroBanner.removeEventListener('touchstart', handleTouch)
+      heroBanner.addEventListener('pointerdown', handlePointer, { passive: true })
+heroBanner.addEventListener('touchstart', handlePointer, { passive: true })
+
     }
   }, [])
 
@@ -468,7 +512,7 @@ function App() {
 
            <section className="section pujo-theme">
           <div className="container">
-            <h2 className="section-title">This Year Pujo Theme</h2>
+            <h2 className="section-title">Saraswati Pujo 2026 · A Theme Inspired by Knowledge</h2>
             <p className="section-subtitle">
               নতুন ভাবনার ছোঁয়ায় উৎসবের সাজ
             </p>

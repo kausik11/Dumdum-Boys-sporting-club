@@ -77,14 +77,14 @@ const Navbar = () => {
             <button className="btn-primary" onClick={() => setIsContactOpen(true)}>
               Contact us
             </button>
-            <button
+            {/* <button
               className="nav-toggle"
               type="button"
               onClick={() => setMenuOpen((prev) => !prev)}
               aria-label="Toggle navigation"
             >
               ☰
-            </button>
+            </button> */}
           </div>
         </div>
       </header>

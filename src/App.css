@@ -86,10 +86,17 @@ body {
   content: "";
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: -6px;
   width: 0;
-  height: 2px;
-  background: var(--primary);
+  height: 4px;
+  border-radius: 10px;
+  background: linear-gradient(
+    90deg,
+    #ff6b6b,
+    #feca57,
+    #1dd1a1,
+    #54a0ff
+  );
   transition: width 0.3s ease;
 }
 
@@ -587,13 +594,32 @@ body {
   font-size: 2rem;
   margin-bottom: 1rem;
   color: #f9f5ef;
+  text-align: center;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 4px;
+  margin: 10px auto 0;
+  border-radius: 10px;
+  background: linear-gradient(
+    90deg,
+    #ff6b6b,
+    #feca57,
+    #1dd1a1,
+    #54a0ff
+  );
 }
 
 .section-subtitle {
-  color: var(--muted);
+  /* color: var(--muted); */
   margin-bottom: 2rem;
-  max-width: 620px;
+  /* max-width: 620px; */
    color: #f9f5ef;
+  text-align: center;
+  
 }
 
 .best-sellers {
@@ -646,14 +672,23 @@ body {
   position: absolute;
   inset: auto 0 0 0;
   padding: 1.25rem 2rem;
-  background: linear-gradient(180deg, rgba(12, 8, 8, 0) 0%, rgba(12, 8, 8, 0.75) 100%);
-  color: #fef7ea;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(145, 35, 35, 0.65) 75%,
+    rgba(184, 134, 11, 0.85) 100%
+  );
+  color: #0a0a0a;
+  font-weight: 600;
 }
+
+
 
 .pujo-theme-overlay span {
   font-family: "Titillium Web", sans-serif;
   font-size: clamp(1rem, 2vw, 1.4rem);
   letter-spacing: 0.08em;
+  word-spacing: 10px;
   text-transform: uppercase;
 }
 
