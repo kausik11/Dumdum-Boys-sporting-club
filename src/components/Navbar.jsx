@@ -57,15 +57,16 @@ const Navbar = () => {
             <a href="#home" onClick={() => setMenuOpen(false)}>
               Home
             </a>
+            <a href="#awards" onClick={() => setMenuOpen(false)}>
+              Milestones
+            </a>
             <a href="#menu" onClick={() => setMenuOpen(false)}>
               Moments
             </a>
             <a href="#story" onClick={() => setMenuOpen(false)}>
               story
             </a>
-            <a href="#awards" onClick={() => setMenuOpen(false)}>
-              Milestones
-            </a>
+            
             <a href="#gallery" onClick={() => setMenuOpen(false)}>
               Gallery
             </a>
@@ -108,22 +109,16 @@ const Navbar = () => {
             </div>
             <div className="contact-modal-body">
               <div>
-                <h4>Mithu Da</h4>
+                <h4>Mithun</h4>
                 {/* <p>1, Ghoshpara Rd, Barrackpore, West Bengal 700120</p> */}
-                <p>Phone: 8100510647</p>
-                <p>Email: dadaboudiofficial@gmail.com</p>
+                <p>Phone: 9830013500</p>
+                <p>Email: dumdumboyssportingclub@gmail.com</p>
               </div>
               <div>
-                <h4>Swami Da</h4>
+                <h4>Swami</h4>
                 {/* <p>12, 10, SN Banerjee Rd, Barrackpore, West Bengal 700120</p> */}
-                <p>Phone: 8017099986</p>
-                <p>Email: dadaboudiofficial@gmail.com</p>
-              </div>
-              <div>
-                <h4>Jayanta Da</h4>
-                {/* <p>33, Barrackpore Trunk Rd, Sodepur, West Bengal 700117</p> */}
-                <p>Phone: 9748528886</p>
-                <p>Email: dadaboudiofficial@gmail.com</p>
+                <p>Phone: 9874074477</p>
+                <p>Email: dumdumboyssportingclub@gmail.com</p>
               </div>
             </div>
           </div>

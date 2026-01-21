@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa6";
+import { useEffect, useRef, useState } from "react";
+import { FaFacebookF, FaInstagram, FaEnvelope } from "react-icons/fa6";
 import LocomotiveScroll from "locomotive-scroll";
 import "./App.css";
 import Navbar from "./components/Navbar";
@@ -48,6 +48,22 @@ import galleryImage34 from "./assets/gallery/3 (8).jpeg";
 import galleryImage35 from "./assets/gallery/3 (9).jpeg";
 import galleryImage36 from "./assets/gallery/3(35).jpeg";
 import galleryImage37 from "./assets/gallery/3(36).jpeg";
+import galleryImage38 from "./assets/gallery/3(38).jpeg";
+import galleryImage39 from "./assets/gallery/3(39).jpeg";
+import galleryImage40 from "./assets/gallery/3(40).jpeg";
+import galleryImage41 from "./assets/gallery/3(41).jpeg";
+import galleryImage42 from "./assets/gallery/3(42).jpeg";
+import galleryImage43 from "./assets/gallery/3(43).jpeg";
+import galleryImage44 from "./assets/gallery/3(44).jpeg";
+import galleryImage45 from "./assets/gallery/3(45).jpeg";
+import galleryImage46 from "./assets/gallery/3(46).jpeg";
+import galleryImage47 from "./assets/gallery/3(47).jpeg";
+import galleryImage48 from "./assets/gallery/3(48).jpeg";
+import galleryImage49 from "./assets/gallery/3(49).jpeg";
+import galleryImage50 from "./assets/gallery/3(50).jpeg";
+import galleryImage51 from "./assets/gallery/3(51).jpeg";
+import galleryImage52 from "./assets/gallery/3(52).jpeg";
+import galleryImage53 from "./assets/gallery/3(53).jpeg";
 
 import bestMoment1 from "./assets/Best_moments/1.jpeg";
 import bestMoment2 from "./assets/Best_moments/2.jpeg";
@@ -60,10 +76,15 @@ import bestMoment8 from "./assets/Best_moments/8.jpeg";
 import bestMoment9 from "./assets/Best_moments/9.jpeg";
 import bestMoment10 from "./assets/Best_moments/10.jpeg";
 import bestMoment11 from "./assets/Best_moments/11.jpeg";
+import bestMoment12 from "./assets/Best_moments/12.jpeg";
 
 const bestSellers = [
   {
-    name: "Pushpanjali Glow",
+    name: "Youth Spirit",
+    image: bestMoment12,
+  },
+  {
+    name: "Community United",
     image: bestMoment1,
   },
   {
@@ -71,11 +92,11 @@ const bestSellers = [
     image: bestMoment2,
   },
   {
-    name: "Artisan Craft",
+    name: "One Shared Vision",
     image: bestMoment3,
   },
   {
-    name: "Evening Aarti",
+    name: "Tradition and Togetherness",
     image: bestMoment4,
   },
   {
@@ -108,53 +129,59 @@ const bestSellers = [
   },
 ];
 
-const awards = [
-  {
-    title: "Heritage Taste Award",
-    year: "2023",
-    description: "Recognized for preserving Barrackpore culinary legacy.",
-  },
-  {
-    title: "Best Biryani in Bengal",
-    year: "2022",
-    description: "Celebrated for our signature aromatic recipe.",
-  },
-  {
-    title: "Hospitality Excellence",
-    year: "2021",
-    description: "Honoring our warm, family-first service.",
-  },
-];
+// const awards = [
+//   {
+//     title: "Heritage Taste Award",
+//     year: "2023",
+//     description: "Recognized for preserving Barrackpore culinary legacy.",
+//   },
+//   {
+//     title: "Best Biryani in Bengal",
+//     year: "2022",
+//     description: "Celebrated for our signature aromatic recipe.",
+//   },
+//   {
+//     title: "Hospitality Excellence",
+//     year: "2021",
+//     description: "Honoring our warm, family-first service.",
+//   },
+// ];
 
-const locations = [
-  {
-    name: "Dada Boudi Hotel",
-    address: "1, Ghoshpara Rd, Barrackpore, West Bengal 700120",
-    phone: "8100510647",
-    image:
-      "https://www.dadaboudihotel.in/static/media/dadaboudi-front.627e4fca20ec0a5334a3.jpg",
-  },
-  {
-    name: "Dada Boudi Restaurant",
-    address: "12, 10, SN Banerjee Rd, Barrackpore, West Bengal 700120",
-    phone: "8017099986",
-    image:
-      "https://www.dadaboudihotel.in/static/media/dadaboudi-restaurant.6228d74e60010b751fac.jpg",
-  },
-  {
-    name: "Dada Boudi Sodepur",
-    address: "33, Barrackpore Trunk Rd, Sodepur, West Bengal 700117",
-    phone: "9748528886",
-    image:
-      "https://www.dadaboudihotel.in/static/media/dadaboudi-soadpur.9aa4298572190cf9a65e.jpg",
-  },
-];
+// const locations = [
+//   {
+//     name: "Dada Boudi Hotel",
+//     address: "1, Ghoshpara Rd, Barrackpore, West Bengal 700120",
+//     phone: "8100510647",
+//     image:
+//       "https://www.dadaboudihotel.in/static/media/dadaboudi-front.627e4fca20ec0a5334a3.jpg",
+//   },
+//   {
+//     name: "Dada Boudi Restaurant",
+//     address: "12, 10, SN Banerjee Rd, Barrackpore, West Bengal 700120",
+//     phone: "8017099986",
+//     image:
+//       "https://www.dadaboudihotel.in/static/media/dadaboudi-restaurant.6228d74e60010b751fac.jpg",
+//   },
+//   {
+//     name: "Dada Boudi Sodepur",
+//     address: "33, Barrackpore Trunk Rd, Sodepur, West Bengal 700117",
+//     phone: "9748528886",
+//     image:
+//       "https://www.dadaboudihotel.in/static/media/dadaboudi-soadpur.9aa4298572190cf9a65e.jpg",
+//   },
+// ];
 
 const galleryImages = [
-  {
-    src: galleryImage1,
-    caption: "Gallery moment 1",
+   {
+    src: galleryImage22,
+    caption: "Gallery moment 22",
   },
+  
+  {
+    src: galleryImage28,
+    caption: "Gallery moment 38",
+  },
+  
   {
     src: galleryImage2,
     caption: "Gallery moment 2",
@@ -164,21 +191,24 @@ const galleryImages = [
     caption: "Gallery moment 3",
   },
   {
-    src: galleryImage4,
-    caption: "Gallery moment 4",
+    src: galleryImage39,
+    caption: "Gallery moment 48",
   },
+  
   {
-    src: galleryImage5,
-    caption: "Gallery moment 5",
+    src: galleryImage23,
+    caption: "Gallery moment 23",
   },
+  
   {
     src: galleryImage6,
     caption: "Gallery moment 6",
   },
-  {
-    src: galleryImage7,
-    caption: "Gallery moment 7",
+   {
+    src: galleryImage40,
+    caption: "Gallery moment 40",
   },
+  
   {
     src: galleryImage8,
     caption: "Gallery moment 8",
@@ -215,6 +245,11 @@ const galleryImages = [
     src: galleryImage16,
     caption: "Gallery moment 16",
   },
+   {
+    src: galleryImage38,
+    caption: "Gallery moment 38",
+  },
+  
   {
     src: galleryImage17,
     caption: "Gallery moment 17",
@@ -222,6 +257,10 @@ const galleryImages = [
   {
     src: galleryImage18,
     caption: "Gallery moment 18",
+  },
+  {
+    src: galleryImage47,
+    caption: "Gallery moment 48",
   },
   {
     src: galleryImage19,
@@ -236,13 +275,15 @@ const galleryImages = [
     caption: "Gallery moment 21",
   },
   {
-    src: galleryImage22,
-    caption: "Gallery moment 22",
+    src: galleryImage5,
+    caption: "Gallery moment 5",
   },
   {
-    src: galleryImage23,
-    caption: "Gallery moment 23",
+    src: galleryImage1,
+    caption: "Gallery moment 1",
   },
+ 
+  
   {
     src: galleryImage24,
     caption: "Gallery moment 24",
@@ -288,6 +329,10 @@ const galleryImages = [
     caption: "Gallery moment 34",
   },
   {
+    src: galleryImage4,
+    caption: "Gallery moment 4",
+  },
+  {
     src: galleryImage35,
     caption: "Gallery moment 35",
   },
@@ -299,7 +344,89 @@ const galleryImages = [
     src: galleryImage37,
     caption: "Gallery moment 37",
   },
+  
+  {
+    src: galleryImage39,
+    caption: "Gallery moment 39",
+  },
+  {
+    src: galleryImage40,
+    caption: "Gallery moment 40",
+  },
+  {
+    src: galleryImage41,
+    caption: "Gallery moment 41",
+  },
+  {
+    src: galleryImage42,
+    caption: "Gallery moment 42",
+  },
+  {
+    src: galleryImage43,
+    caption: "Gallery moment 43",
+  },
+  {
+    src: galleryImage44,
+    caption: "Gallery moment 44",
+  },
+  {
+    src: galleryImage45,
+    caption: "Gallery moment 45",
+  },
+  {
+    src: galleryImage46,
+    caption: "Gallery moment 46",
+  },
+  {
+    src: galleryImage47,
+    caption: "Gallery moment 47",
+  },
+  
+  {
+    src: galleryImage49,
+    caption: "Gallery moment 49",
+  },
+  {
+    src: galleryImage50,
+    caption: "Gallery moment 50",
+  },
+  {
+    src: galleryImage51,
+    caption: "Gallery moment 51",
+  },
+  {
+    src: galleryImage52,
+    caption: "Gallery moment 52",
+  },
+  {
+    src: galleryImage53,
+    caption: "Gallery moment 53",
+  },
 ];
+
+const parallaxSlides = [
+  {
+    image: fullpage1,
+    title: "The Beginning of Our Shared Journey",
+    text: "আমাদের পথচলার শুরু",
+  },
+  {
+    image: bestMoment2,
+    title: "Ideas with Clarity and Purpose",
+    text: "স্পষ্ট ভাবনা, দৃঢ় বার্তা",
+  },
+  {
+    image: bestMoment7,
+    title: "Where Light, Motion, and Emotion Meet",
+    text: "আলো, গতি ও আবেগের মেলবন্ধন",
+  },
+  {
+    image: heroImage1,
+    title: "Graceful Beauty in Thoughtful Simplicity",
+    text: "সরলতায় সৌন্দর্য—আলো ও পরিমিত নকশায় সাজানো সরস্বতী পূজার মণ্ডপ",
+  },
+];
+
 
 const videoSlides = [
   {
@@ -320,6 +447,13 @@ const videoSlides = [
   },
 ];
 
+const getInitialGalleryCount = () => {
+  if (typeof window === "undefined") {
+    return 8;
+  }
+  return window.matchMedia("(max-width: 768px)").matches ? 4 : 8;
+};
+
 function App() {
   const heroBannerRef = useRef(null);
   const ripplesInitializedRef = useRef(false);
@@ -332,6 +466,60 @@ function App() {
   const videoSliderRef = useRef(null);
   const scrollContainerRef = useRef(null);
   const bestSliderRef = useRef(null);
+  const [galleryStep, setGalleryStep] = useState(getInitialGalleryCount);
+  const [galleryVisibleCount, setGalleryVisibleCount] = useState(
+    getInitialGalleryCount
+  );
+  const [hasLoadedMore, setHasLoadedMore] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    const handleMediaChange = (event) => {
+      const nextStep = event.matches ? 4 : 8;
+      setGalleryStep(nextStep);
+      setGalleryVisibleCount((current) => {
+        if (hasLoadedMore) {
+          return Math.min(galleryImages.length, Math.max(current, nextStep));
+        }
+        return nextStep;
+      });
+    };
+
+    handleMediaChange(mediaQuery);
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", handleMediaChange);
+    } else {
+      mediaQuery.addListener(handleMediaChange);
+    }
+
+    return () => {
+      if (mediaQuery.removeEventListener) {
+        mediaQuery.removeEventListener("change", handleMediaChange);
+      } else {
+        mediaQuery.removeListener(handleMediaChange);
+      }
+    };
+  }, [hasLoadedMore]);
+
+  const visibleGalleryImages = galleryImages.slice(0, galleryVisibleCount);
+  const hasMoreGalleryImages = galleryVisibleCount < galleryImages.length;
+
+  const handleLoadMoreGallery = () => {
+    setGalleryVisibleCount((current) =>
+      Math.min(galleryImages.length, current + galleryStep)
+    );
+    setHasLoadedMore(true);
+  };
+
+  const handleCollapseGallery = () => {
+    setGalleryVisibleCount(galleryStep);
+    setHasLoadedMore(false);
+  };
 
   useEffect(() => {
     const heroBanner = heroBannerRef.current;
@@ -483,6 +671,40 @@ function App() {
         window.cancelAnimationFrame(rafId);
       }
       $(window).off("resize.carouselMarquee");
+    };
+  }, []);
+
+  useEffect(() => {
+    const $ = window.jQuery;
+    const hasJarallax = typeof window.jarallax === "function";
+    const hasJqueryJarallax = !!($ && $.fn && $.fn.jarallax);
+    if (!hasJarallax && !hasJqueryJarallax) {
+      return;
+    }
+
+    const elements = document.querySelectorAll(".jarallax");
+    if (!elements.length) {
+      return;
+    }
+
+    const options = {
+      speed: 0.35,
+      imgSize: "contain",
+      imgPosition: "center center",
+    };
+
+    if (hasJqueryJarallax) {
+      $(elements).jarallax(options);
+    } else if (hasJarallax) {
+      window.jarallax(elements, options);
+    }
+
+    return () => {
+      if (hasJqueryJarallax) {
+        $(elements).jarallax("destroy");
+      } else if (hasJarallax) {
+        window.jarallax(elements, "destroy");
+      }
     };
   }, []);
 
@@ -737,7 +959,7 @@ function App() {
 
           {/* horizontal image slider */}
 
-          <OnePageScroll />
+          
 
           <section className="hero hero-video">
             <video
@@ -779,6 +1001,32 @@ function App() {
                 🌸এবারের নিবেদন-জ্ঞান, পবিত্রতা ও শুভ্রতার প্রতীক মা সরস্বতীর
                 রূপ—মহাশ্বেতা।🌸
               </span>
+            </div>
+          </section>
+
+          {/* paralax view with text */}
+          <section id="awards" className="parallax-section" aria-label="Parallax highlights">
+            <div className="container">
+              <h2 className="section-title">Festival Highlights</h2>
+              <p className="section-subtitle">
+                Moments of devotion, unity, and celebration in every frame.
+              </p>
+              <div className="parallax-grid">
+                {parallaxSlides.map((slide) => (
+                  <article className="jarallax parallax-card" key={slide.title}>
+                    <img
+                      className="jarallax-img"
+                      src={slide.image}
+                      alt={slide.title}
+                      loading="lazy"
+                    />
+                    <div className="parallax-content">
+                      <h3>{slide.title}</h3>
+                      <p>{slide.text}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
             </div>
           </section>
 
@@ -925,7 +1173,7 @@ function App() {
                 শুভ্রতার আলোয় জ্ঞানের উৎসবের এক ঝলক
               </p>
               <div className="gallery-grid">
-                {galleryImages.map((image) => (
+                {visibleGalleryImages.map((image) => (
                   <button
                     key={image.src}
                     type="button"
@@ -934,10 +1182,43 @@ function App() {
                     data-caption={image.caption}
                   >
                     <img src={image.src} alt={image.caption} loading="lazy" />
-                    <span>{image.caption}</span>
+                    {/* <span>{image.caption}</span> */}
                   </button>
                 ))}
               </div>
+              {galleryImages.length === 0 ? (
+                <div className="gallery-actions">
+                  <button
+                    className="btn-primary"
+                    type="button"
+                    onClick={handleCollapseGallery}
+                  >
+                    Collapse
+                  </button>
+                </div>
+              ) : hasMoreGalleryImages ? (
+                <div className="gallery-actions">
+                  <button
+                    className="btn-primary"
+                    type="button"
+                    onClick={handleLoadMoreGallery}
+                  >
+                    Load more
+                  </button>
+                </div>
+              ) : (
+                hasLoadedMore && (
+                  <div className="gallery-actions">
+                    <button
+                      className="btn-primary"
+                      type="button"
+                      onClick={handleCollapseGallery}
+                    >
+                      Collapse
+                    </button>
+                  </div>
+                )
+              )}
               <div className="gallery-overlay" aria-hidden="true">
                 <div className="gallery-frame">
                   <button
@@ -978,28 +1259,44 @@ function App() {
             <div>
               <h4>Contact</h4>
               <ul>
-                <li>Phone: 8100510647</li>
-                <li>Email: dadaboudiofficial@gmail.com</li>
+                <li>Phone: 9874074477</li>
+                <li>Email: dumdumboyssportingclub@gmail.com</li>
               </ul>
             </div>
             <div>
               <h4>Social</h4>
               <div className="social-links">
-                <a href="#" aria-label="Facebook">
+                <a
+                  href="https://www.facebook.com/boyssportingclub"
+                  aria-label="Facebook"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <FaFacebookF aria-hidden="true" focusable="false" />
                 </a>
-                <a href="#" aria-label="Instagram">
+                <a
+                  href="https://www.instagram.com/dumdumboyssportingclub_2026/"
+                  aria-label="Instagram"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <FaInstagram aria-hidden="true" focusable="false" />
                 </a>
-                <a href="#" aria-label="YouTube">
-                  <FaYoutube aria-hidden="true" focusable="false" />
+                <a
+                  href="mailto:dumdumboyssportingclub@gmail.com"
+                  aria-label="Email"
+                >
+                  <FaEnvelope aria-hidden="true" focusable="false" />
                 </a>
               </div>
             </div>
           </div>
           <p className="footer-credit">
-            © 2026 Dumdum Boys Sporting Club. All rights reserved. Proudly
-            maintained by ❤️{" "}
+            © 2026 Dumdum Boys Sporting Club. All rights reserved. Contact:{" "}
+            <a href="mailto:dumdumboyssportingclub@gmail.com">
+              dumdumboyssportingclub@gmail.com
+            </a>
+            . Proudly maintained by ❤️{" "}
             <a
               href="https://www.linkedin.com/in/kausik-saha-fsd"
               target="_blank"
@@ -1013,8 +1310,8 @@ function App() {
         <div className="bottom-tab" data-scroll-section>
           <a href="#home">Home</a>
           <a href="#awards">Milestones</a>
-          <a href="#menu">Moments</a>
           <a href="#story">story</a>
+          <a href="#menu">Moments</a>
           <a href="#gallery">Gallery</a>
         </div>
       </div>
