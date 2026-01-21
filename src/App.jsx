@@ -519,7 +519,7 @@ heroBanner.addEventListener('touchstart', handlePointer, { passive: true })
             <div className="pujo-theme-card">
               <img src={ongoing1} alt="This year pujo theme" loading="lazy" />
               <div className="pujo-theme-overlay">
-                <span>Ongoing Theme Showcase</span>
+                {/* <span>Ongoing Theme Showcase</span> */}
               </div>
             </div>
           </div>
