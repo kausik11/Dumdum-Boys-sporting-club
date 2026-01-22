@@ -78,8 +78,19 @@ import bestMoment10 from "./assets/Best_moments/10.jpeg";
 import bestMoment11 from "./assets/Best_moments/11.jpeg";
 import bestMoment12 from "./assets/Best_moments/12.jpeg";
 
-// import new image
-import newImage2 from "./assets/newImage/new (2).jpeg"
+import themeImage1 from "./assets/newImage/new (1).jpeg";
+// import themeImage2 from "./assets/newImage/new (2).jpeg";
+import themeImage3 from "./assets/newImage/new (3).jpeg";
+import themeImage4 from "./assets/newImage/new (4).jpeg";
+import themeImage5 from "./assets/newImage/new (5).jpeg";
+import themeImage6 from "./assets/newImage/new (6).jpeg";
+import themeImage7 from "./assets/newImage/new (7).jpeg";
+import themeImage8 from "./assets/newImage/new (8).jpeg";
+import themeImage9 from "./assets/newImage/new (9).jpeg";
+import themeImage10 from "./assets/newImage/new (10).jpeg";
+import themeImage11 from "./assets/newImage/new (11).jpeg";
+import newheroimage from "./assets/newImage/newheroimage.png";
+// newheroimage
 
 const bestSellers = [
   {
@@ -130,6 +141,19 @@ const bestSellers = [
     name: "Sacred Smiles",
     image: bestMoment11,
   },
+];
+
+const themeGalleryImages = [
+  themeImage1,
+  themeImage3,
+  themeImage4,
+  themeImage5,
+  themeImage6,
+  themeImage7,
+  themeImage8,
+  themeImage9,
+  themeImage10,
+  themeImage11,
 ];
 
 // const awards = [
@@ -933,7 +957,7 @@ function App() {
             id="home"
             className="hero-banner"
             ref={heroBannerRef}
-            style={{ backgroundImage: `url(${newImage2})` }}
+            style={{ backgroundImage: `url(${newheroimage})` }}
             role="img"
             aria-label="Hero banner"
           >
@@ -1004,6 +1028,25 @@ function App() {
                 🌸এবারের নিবেদন-জ্ঞান, পবিত্রতা ও শুভ্রতার প্রতীক মা সরস্বতীর
                 রূপ—মহাশ্বেতা।🌸
               </span>
+            </div>
+          </section>
+
+          {/* this year theme image gallery */}
+          <section className="section theme-gallery" aria-label="Mahashweta theme gallery">
+            <div className="container">
+              <h2 className="section-title">First Exclusive look of মহাশ্বেতা</h2>
+              <p className="section-subtitle">
+                মহাশ্বেতার অনন্য রূপের প্রথম ঝলক।
+              </p>
+              <div className="theme-slider" role="region" aria-roledescription="carousel">
+                <div className="theme-slider-track">
+                  {[...themeGalleryImages, ...themeGalleryImages].map((src, index) => (
+                    <div className="theme-slide" key={`${src}-${index}`}>
+                      <img src={src} alt={`Mahashweta preview ${index + 1}`} loading="lazy" />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </section>
 
