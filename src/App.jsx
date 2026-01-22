@@ -78,6 +78,9 @@ import bestMoment10 from "./assets/Best_moments/10.jpeg";
 import bestMoment11 from "./assets/Best_moments/11.jpeg";
 import bestMoment12 from "./assets/Best_moments/12.jpeg";
 
+// import new image
+import newImage2 from "./assets/newImage/new (2).jpeg"
+
 const bestSellers = [
   {
     name: "Youth Spirit",
@@ -930,7 +933,7 @@ function App() {
             id="home"
             className="hero-banner"
             ref={heroBannerRef}
-            style={{ backgroundImage: `url(${heroImage2})` }}
+            style={{ backgroundImage: `url(${newImage2})` }}
             role="img"
             aria-label="Hero banner"
           >
